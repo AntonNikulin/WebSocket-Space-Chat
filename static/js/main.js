@@ -1,8 +1,12 @@
 //Arrow key codes
-var UP = 38;
-var DOWN = 40;
-var RIGHT = 39;
-var LEFT = 37;
+var KEY = {
+    UP:  38,
+    DOWN:  40,
+    RIGHT:  39,
+    LEFT:  37
+};
+KEY.pressedKey = [];
+
 //Directions
 var moveUp = false;
 var moveDown = false;
@@ -11,43 +15,11 @@ var moveLeft = false;
 
 //keyboard listeners
 window.addEventListener("keydown", function(event){
-    switch (event.keyCode){
-        case UP:
-            moveUp = true;
-            break;
-
-        case DOWN:
-            moveDown = true;
-            break;
-
-        case LEFT:
-            moveLeft = true;
-            break;
-
-        case RIGHT:
-            moveRight = true;
-            break;
-    }
+    KEY.pressedKey[event.keyCode] = true;
 }, false);
 
 window.addEventListener("keyup", function(event){
-    switch(event.keyCode){
-        case UP:
-            moveUp = false;
-            break;
-
-        case DOWN:
-            moveDown = false;
-            break;
-
-        case LEFT:
-            moveLeft = false;
-            break;
-
-        case RIGHT:
-            moveRight = false;
-            break;
-    }
+    KEY.pressedKey[event.keyCode] = false;
 }, false);
 
 
@@ -105,27 +77,28 @@ function update() {
 
     //Sprite movement
     //UP
-    if (moveUp && !moveDown){
+    if (KEY.pressedKey[KEY.UP] && !KEY.pressedKey[KEY.DOWN]){
         playerShip.vy = -5;
+        console.log(playerShip.vy);
     }
     //DOWN
-    if (moveDown && !moveUp){
+    if (KEY.pressedKey[KEY.DOWN] && !KEY.pressedKey[KEY.UP]){
         playerShip.vy = 5;
     }
     //LEFT
-    if (moveLeft && !moveRight){
+    if (KEY.pressedKey[KEY.LEFT] && !KEY.pressedKey[KEY.RIGHT]){
         playerShip.vx = -5;
     }
     //RIGHT
-    if (moveRight && !moveLeft){
+    if (KEY.pressedKey[KEY.RIGHT] && !KEY.pressedKey[KEY.LEFT]){
         playerShip.vx = 5;
     }
 
     //Set velocity to zero if none of the key are being pressed
-    if(!moveUp && !moveDown){
+    if(!KEY.pressedKey[KEY.UP] && !KEY.pressedKey[KEY.DOWN]){
         playerShip.vy = 0;
     }
-    if (!moveLeft && !moveRight){
+    if (!KEY.pressedKey[KEY.LEFT] && !KEY.pressedKey[KEY.RIGHT]){
         playerShip.vx = 0;
     }
 
