@@ -69,7 +69,7 @@ function render(){
             drawingSurface.drawImage(
                 shipImage,
                 sprite.sourceX, sprite.sourceY, sprite.sourceWidth, sprite.sourceHeight,
-                Math.floor(sprite.x), Math.floor(sprite.y), sprite.width, sprite.height
+                Math.floor(-sprite.width/2), Math.floor(-sprite.height/2), sprite.width, sprite.height
             );
 
             //Restore the drawing surface before rotation
