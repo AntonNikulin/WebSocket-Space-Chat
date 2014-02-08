@@ -11,6 +11,8 @@ canvas.height = document.body.clientHeight;
 //players Ship sprite object
 var shipObject =
 {
+    rotation: 0, //value 0-360
+
     //position of source image in sprite
     sourceX: 0,
     sourceY: 0,
@@ -41,6 +43,7 @@ function imageLoadHandler(){
 function update() {
     //Create animation loop
     window.requestAnimationFrame(update, canvas);
+    playerShip.rotation +=2;
     //Render
     render();
 }
@@ -53,11 +56,24 @@ function render(){
     if (sprites.length !== 0){
         for(var i=0; i<sprites.length; i++){
             var sprite = sprites[i];
+
+            drawingSurface.save();
+
+            //Rotate the canvas
+            drawingSurface.translate(
+                Math.floor(sprite.x + (sprite.width / 2)),
+                Math.floor(sprite.y + (sprite.height / 2))
+            );
+            drawingSurface.rotate(sprite.rotation * Math.PI / 180);
+
             drawingSurface.drawImage(
                 shipImage,
                 sprite.sourceX, sprite.sourceY, sprite.sourceWidth, sprite.sourceHeight,
                 Math.floor(sprite.x), Math.floor(sprite.y), sprite.width, sprite.height
             );
+
+            //Restore the drawing surface before rotation
+            drawingSurface.restore();
         }
     }
 }
