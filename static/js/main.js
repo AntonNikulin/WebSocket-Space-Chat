@@ -1,12 +1,4 @@
-var host = 'ws://localhost:8000/ws';
-var websocket = new WebSocket(host);
-websocket.onopen = function (evt) {console.log("conn open") };
-websocket.onmessage = function(evt) {
-    console.log(evt.data);
-};
-websocket.onerror = function (evt) { };
-
-
+multiplayer.init();
 //Arrow key codes
 var KEY = {
     UP:  38,
