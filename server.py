@@ -1,3 +1,4 @@
+import uuid
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
@@ -14,8 +15,18 @@ class IndexHandler(tornado.web.RequestHandler):
 
 
 class WSHandler(tornado.websocket.WebSocketHandler):
+    #array to store connected users
+    users = []
+
     def open(self):
-        self.write_message("test")
+        WSHandler.users.append(self)
+        #assign to unique id to each user
+        id = uuid.uuid4()
+        self.write_message(str(id))
+
+    def close(self):
+        self.write_message("serv")
+        WSHandler.users.remove(self)
 
 
 if __name__ == "__main__":
