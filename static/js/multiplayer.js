@@ -4,8 +4,14 @@ var multiplayer ={
 
     init : function(){
         this.webSocket = new WebSocket(this.webSocketHost);
-        this.webSocket.onopen = multiplayer.handleOnOpen;
-        this.webSocket.onmessage = multiplayer.handleOnMessage;
+        this.webSocket.onopen = this.handleOnOpen;
+        this.webSocket.onmessage = this.handleOnMessage;
+    },
+
+    sendMessage: function(message){
+        if (this.webSocket){
+            this.webSocket.send(message)
+        }
     },
 
     handleOnOpen: function(){

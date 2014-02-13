@@ -24,6 +24,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         id = uuid.uuid4()
         self.write_message(str(id))
 
+    def on_message(self, message):
+        for user in self.users:
+            user.write_message(message)
+
     def close(self):
         self.write_message("serv")
         WSHandler.users.remove(self)
