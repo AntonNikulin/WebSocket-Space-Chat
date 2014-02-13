@@ -1,4 +1,6 @@
 import uuid
+import json
+
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
@@ -25,6 +27,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.write_message(str(id))
 
     def on_message(self, message):
+        print str(message)
         for user in self.users:
             user.write_message(message)
 
