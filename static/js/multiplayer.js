@@ -9,7 +9,7 @@ var multiplayer ={
     },
 
     sendMessage: function(message){
-        if (this.webSocket){
+        if (this.webSocket.readyState === WebSocket.OPEN){
             this.webSocket.send(message)
         }
     },
