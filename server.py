@@ -35,15 +35,17 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.write_message("serv")
         WSHandler.users.remove(self)
 
-
-if __name__ == "__main__":
-    tornado.options.parse_command_line()
-    app = tornado.web.Application(
+class Application(tornado.web.Application):
+    def __init__(self):
         handlers=[
             (r"/", IndexHandler),
             (r"/ws", WSHandler),
         ]
-    )
+        tornado.web.Application.__init__(self, handlers, debug=True)
+
+if __name__ == "__main__":
+    tornado.options.parse_command_line()
+    app = Application()
     http_server = tornado.httpserver.HTTPServer(app)
     http_server.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
