@@ -54,7 +54,12 @@ var shipObject =
     x: 0,
     y: 0,
     width: 52,
-    height: 39
+    height: 39,
+
+    setPosition: function(x,y){
+        this.x = x;
+        this.y = y;
+    }
 }
 
 //create sprite
