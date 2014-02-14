@@ -1,3 +1,4 @@
+import os
 import uuid
 import json
 
@@ -13,7 +14,7 @@ define("port", default=8000, help="run on the given port", type=int)
 
 class IndexHandler(tornado.web.RequestHandler):
     def get(self):
-        self.write("Test")
+        self.render("index.html")
 
 
 class WSHandler(tornado.websocket.WebSocketHandler):
@@ -41,7 +42,11 @@ class Application(tornado.web.Application):
             (r"/", IndexHandler),
             (r"/ws", WSHandler),
         ]
-        tornado.web.Application.__init__(self, handlers, debug=True)
+        settings = {
+            'template_path': os.path.dirname(__file__),
+            'static_path': os.path.join(os.path.dirname(__file__), "static")
+        }
+        tornado.web.Application.__init__(self, handlers, debug=True, **settings)
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
