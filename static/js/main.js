@@ -1,3 +1,4 @@
+var p={"x":-1,"y":-2};
 multiplayer.init();
 //Arrow key codes
 var KEY = {
@@ -56,9 +57,9 @@ var shipObject =
     width: 52,
     height: 39,
 
-    setPosition: function(x,y){
-        this.x = x;
-        this.y = y;
+    setPosition: function(obj){
+        this.x = obj.x;
+        this.y = obj.y;
     }
 }
 
@@ -108,6 +109,7 @@ function update() {
         playerShip.vx = 0;
     }
 
+    playerShip.setPosition(p);
     //Move sprite
     playerShip.x += playerShip.vx;
     playerShip.y += playerShip.vy;

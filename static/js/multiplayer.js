@@ -19,7 +19,9 @@ var multiplayer ={
     },
 
     handleOnMessage: function(msg){
-        console.log(msg.data);
+        p=JSON.parse(msg.data);
+        console.log("msg: "+msg.data);
     }
 
 }
+
