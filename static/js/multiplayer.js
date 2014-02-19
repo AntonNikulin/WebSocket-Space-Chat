@@ -10,7 +10,7 @@ var multiplayer ={
 
     sendMessage: function(message){
         if (this.webSocket.readyState === WebSocket.OPEN){
-            this.webSocket.send(message)
+            this.webSocket.send(JSON.stringify(message));
         }
     },
 
@@ -19,7 +19,12 @@ var multiplayer ={
     },
 
     handleOnMessage: function(msg){
-        p=JSON.parse(msg.data);
+        var messageObject = JSON.parse(msg.data);
+        /*switch (messageObject.type) {
+            case "chat-message":
+                multiplayer.SayHi();
+        }
+         */
         console.log("msg: "+msg.data);
     }
 

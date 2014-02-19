@@ -109,7 +109,7 @@ function update() {
         playerShip.vx = 0;
     }
 
-    playerShip.setPosition(p);
+    //playerShip.setPosition(p);
     //Move sprite
     playerShip.x += playerShip.vx;
     playerShip.y += playerShip.vy;
