@@ -1,3 +1,4 @@
+import sys
 import os
 import uuid
 import json
@@ -33,12 +34,16 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.write_message(d)
 
     def on_message(self, message):
-        self.write_message(message)
-        #for user in self.users:
-        #    user.write_message(message)
+        print "users: ", len(self.users)
+        for user in self.users:
+            try:
+                user.write_message(message)
+            except:
+                print sys.exc_info()
+                print "ERR users: ", len(self.users)
 
-    def close(self):
-        self.write_message("serv")
+    def on_close(self):
+        print "-------CLOSED--------"
         WSHandler.users.remove(self)
 
 class Application(tornado.web.Application):
