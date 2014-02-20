@@ -114,7 +114,8 @@ function update() {
     playerShip.x += playerShip.vx;
     playerShip.y += playerShip.vy;
     //send new pos
-    multiplayer.sendMessage(JSON.stringify({"messageType": "shipPosition", "x":playerShip.x, "y":playerShip.y}));
+    var js = {messageType: "shipPosition", x:playerShip.x, y:playerShip.y}
+    multiplayer.sendMessage(js);
 
     //Render
     render();

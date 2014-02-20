@@ -31,7 +31,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             "id": str(uid)
         }
         jObj = json.dumps(d)
-        self.write_message(d)
+        self.write_message(jObj)
 
     def on_message(self, message):
         print "users: ", len(self.users)
