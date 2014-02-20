@@ -21,7 +21,6 @@ var multiplayer ={
 
     handleOnMessage: function(msg){
         var messageObject = JSON.parse(msg.data);
-        console.log("h" +messageObject)
         this.msg = messageObject;
         switch (messageObject.messageType) {
             case "uid":
@@ -30,9 +29,10 @@ var multiplayer ={
 
             case "shipPosition":
                 console.log("shipPosition: "+messageObject.x+"  "+messageObject.y);
+                break;
 
-            default :
-                console.log("hit default "+messageObject);
+            default:
+                console.log("hit default "+msg);
                 break;
         }
     }
