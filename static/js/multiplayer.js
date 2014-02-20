@@ -1,6 +1,7 @@
 var multiplayer ={
     webSocketHost: "ws://localhost:8000/ws",
     webSocket: undefined,
+    msg: undefined,
 
     init : function(){
         this.webSocket = new WebSocket(this.webSocketHost);
@@ -20,12 +21,25 @@ var multiplayer ={
 
     handleOnMessage: function(msg){
         var messageObject = JSON.parse(msg.data);
-        /*switch (messageObject.type) {
-            case "chat-message":
-                multiplayer.SayHi();
+        console.log("h" +messageObject)
+        this.msg = messageObject;
+        switch (messageObject.messageType) {
+            case "uid":
+                console.log("id: "+messageObject.id);
+                break;
+
+            case "shipPosition":
+                console.log("shipPosition: "+messageObject);
+                break;
+
+            case "t":
+                console.log("t");
+                break;
+
+            default :
+                console.log("def");
+                break;
         }
-         */
-        console.log("msg: "+msg.data);
     }
 
 }

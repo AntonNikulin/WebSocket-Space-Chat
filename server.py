@@ -24,13 +24,18 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         WSHandler.users.append(self)
         #assign to unique id to each user
-        id = uuid.uuid4()
-        self.write_message(str(id))
+        uid = uuid.uuid4()
+        d = {
+            "messageType": "uid",
+            "id": str(uid)
+        }
+        jObj = json.dumps(d)
+        self.write_message(d)
 
     def on_message(self, message):
-        print str(message)
-        for user in self.users:
-            user.write_message(message)
+        self.write_message(message)
+        #for user in self.users:
+        #    user.write_message(message)
 
     def close(self):
         self.write_message("serv")
