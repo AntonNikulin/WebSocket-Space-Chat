@@ -9,6 +9,8 @@ import tornado.options
 import tornado.web
 import tornado.websocket
 
+from Objects import Ship
+
 from tornado.options import define, options
 define("port", default=8000, help="run on the given port", type=int)
 
@@ -21,20 +23,24 @@ class IndexHandler(tornado.web.RequestHandler):
 class WSHandler(tornado.websocket.WebSocketHandler):
     #array to store connected users
     users = []
+    ships = {}
 
     def open(self):
         WSHandler.users.append(self)
         #assign to unique id to each user
-        uid = uuid.uuid4()
+        uid = str(uuid.uuid4())
+        ship = Ship(uid)
+        self.ships[uid] = ship
         d = {
             "messageType": "uid",
-            "id": str(uid)
+            "id": uid
         }
         jObj = json.dumps(d)
         self.write_message(jObj)
 
     def on_message(self, message):
-        print "users: ", len(self.users)
+        messageObject = json.loads(message)
+        #if messageObject["messageType"] == "shipPosition":
         for user in self.users:
             try:
                 user.write_message(message)
