@@ -1,4 +1,4 @@
-var p={"x":-1,"y":-2};
+var _ID =0;
 multiplayer.init();
 //Arrow key codes
 var KEY = {
@@ -57,9 +57,15 @@ var shipObject =
     width: 52,
     height: 39,
 
+    id: undefined,
+
     setPosition: function(obj){
         this.x = obj.x;
         this.y = obj.y;
+    },
+
+    setID: function(id){
+        this.id = id;
     }
 }
 
@@ -114,7 +120,12 @@ function update() {
     playerShip.x += playerShip.vx;
     playerShip.y += playerShip.vy;
     //send new pos
-    var js = {messageType: "shipPosition", x:playerShip.x, y:playerShip.y}
+    var js = {
+        messageType: "shipPosition",
+        id: _ID,
+        x:playerShip.x,
+        y:playerShip.y
+    }
     multiplayer.sendMessage(js);
 
     //Render

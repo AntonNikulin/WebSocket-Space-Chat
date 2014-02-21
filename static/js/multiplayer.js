@@ -1,6 +1,7 @@
 var multiplayer ={
     webSocketHost: "ws://localhost:8000/ws",
     webSocket: undefined,
+    id: undefined,
 
     init : function(){
         this.webSocket = new WebSocket(this.webSocketHost);
@@ -23,7 +24,8 @@ var multiplayer ={
 
         switch (messageObject.messageType) {
             case "uid":
-                console.log("id: "+messageObject.id);
+                _ID = messageObject.id;
+                console.log("id: "+_ID);
                 break;
 
             case "shipPosition":

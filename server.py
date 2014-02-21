@@ -40,6 +40,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     def on_message(self, message):
         messageObject = json.loads(message)
+        print messageObject
         #if messageObject["messageType"] == "shipPosition":
         for user in self.users:
             try:
