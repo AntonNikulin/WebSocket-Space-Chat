@@ -30,7 +30,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         #assign to unique id to each user
         uid = str(uuid.uuid4())
         ship = Ship(uid)
-        self.ships[uid] = ship
+        WSHandler.ships[uid] = ship
         d = {
             "messageType": "uid",
             "id": uid
@@ -39,9 +39,15 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.write_message(jObj)
 
     def on_message(self, message):
+        #READ and parse client message and react according to message type
         messageObject = json.loads(message)
-        print messageObject
-        #if messageObject["messageType"] == "shipPosition":
+        if messageObject["messageType"] == "shipPosition":
+            try:
+                ship = WSHandler.ships[messageObject['uid']]
+            except:
+                print "____ERR_____", messageObject
+
+        #WRITE response to clients
         for user in WSHandler.users:
             try:
                 user.write_message(message)

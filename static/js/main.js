@@ -1,4 +1,4 @@
-var _ID =0;
+var _ID = undefined;
 multiplayer.init();
 //Arrow key codes
 var KEY = {
@@ -122,7 +122,7 @@ function update() {
     //send new pos
     var js = {
         messageType: "shipPosition",
-        id: _ID,
+        uid: _ID,
         x:playerShip.x,
         y:playerShip.y
     }
