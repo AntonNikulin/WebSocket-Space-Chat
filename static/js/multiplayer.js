@@ -29,7 +29,7 @@ var multiplayer ={
                 break;
 
             case "shipPosition":
-                console.log("shipPosition: "+messageObject.x+"  "+messageObject.y);
+                console.log("shipPosition: "+messageObject.vx+"  "+messageObject.vy);
                 break;
 
             default:

@@ -123,8 +123,8 @@ function update() {
     var js = {
         messageType: "shipPosition",
         uid: _ID,
-        x:playerShip.x,
-        y:playerShip.y
+        vx:playerShip.vx,
+        vy:playerShip.vy
     }
     multiplayer.sendMessage(js);
 

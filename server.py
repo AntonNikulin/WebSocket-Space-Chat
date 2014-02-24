@@ -44,9 +44,13 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         if messageObject["messageType"] == "shipPosition":
             try:
                 ship = WSHandler.ships[messageObject['uid']]
+                vx = messageObject["vx"]
+                vy = messageObject["vy"]
+                ship.setPosition(vx,vy)
             except:
                 print "____ERR_____", messageObject
 
+        print message
         #WRITE response to clients
         for user in WSHandler.users:
             try:
