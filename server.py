@@ -46,18 +46,19 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 ship = WSHandler.ships[messageObject['uid']]
                 vx = messageObject["vx"]
                 vy = messageObject["vy"]
-                ship.setPosition(vx,vy)
-            except:
-                print "____ERR_____", messageObject
+                ship.computeShipPosition(vx,vy)
+                response = {
+                    "messageType": "shipPosition",
+                    "uid": ship.getUID(),
+                    "x": ship.getX(),
+                    "y": ship.getY()
+                }
+                #WRITE response to clients
+                for user in WSHandler.users:
+                    user.write_message(response)
 
-        print message
-        #WRITE response to clients
-        for user in WSHandler.users:
-            try:
-                user.write_message(message)
             except:
-                print sys.exc_info()
-                print "ERR users: ", len(self.users)
+                print "____ERR_____", sys.exc_info()
 
     def on_close(self):
         print "-------CLOSED--------"

@@ -29,7 +29,9 @@ var multiplayer ={
                 break;
 
             case "shipPosition":
-                console.log("shipPosition: "+messageObject.vx+"  "+messageObject.vy);
+                console.log(messageObject);
+                //console.log("shipPosition: "+messageObject.x+"  "+messageObject.y);
+                playerShip.setPosition(messageObject);
                 break;
 
             default:

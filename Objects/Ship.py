@@ -5,9 +5,15 @@ class Ship:
         self.__x = 20
         self.__y = 20
 
-    def setPosition(self, x, y):
-        self.__x = x
-        self.__y = y
+    def getUID(self):
+        return self.__uid
+
+    def getX(self):
+        return self.__x
+
+    def getY(self):
+        return self.__y
 
     def computeShipPosition(self, vx, vy):
-        self.setPosition(self.__x + vx, self.__y + vy)
+        self.__x += vx
+        self.__y += vy
