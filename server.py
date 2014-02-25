@@ -1,7 +1,4 @@
-import sys
 import os
-import uuid
-import json
 
 import tornado.httpserver
 import tornado.ioloop
@@ -9,66 +6,16 @@ import tornado.options
 import tornado.web
 import tornado.websocket
 
-from Objects import Ship
+from Handlers import IndexHandler, WSHandler
 
 from tornado.options import define, options
 define("port", default=8000, help="run on the given port", type=int)
 
-
-class IndexHandler(tornado.web.RequestHandler):
-    def get(self):
-        self.render("index.html")
-
-
-class WSHandler(tornado.websocket.WebSocketHandler):
-    #array to store connected users
-    users = []
-    ships = {}
-
-    def open(self):
-        WSHandler.users.append(self)
-        #assign to unique id to each user
-        uid = str(uuid.uuid4())
-        ship = Ship(uid)
-        WSHandler.ships[uid] = ship
-        d = {
-            "messageType": "uid",
-            "id": uid
-        }
-        jObj = json.dumps(d)
-        self.write_message(jObj)
-
-    def on_message(self, message):
-        #READ and parse client message and react according to message type
-        messageObject = json.loads(message)
-        if messageObject["messageType"] == "shipPosition":
-            try:
-                ship = WSHandler.ships[messageObject['uid']]
-                vx = messageObject["vx"]
-                vy = messageObject["vy"]
-                ship.computeShipPosition(vx,vy)
-                response = {
-                    "messageType": "shipPosition",
-                    "uid": ship.getUID(),
-                    "x": ship.getX(),
-                    "y": ship.getY()
-                }
-                #WRITE response to clients
-                for user in WSHandler.users:
-                    user.write_message(response)
-
-            except:
-                print "____ERR_____", sys.exc_info()
-
-    def on_close(self):
-        print "-------CLOSED--------"
-        WSHandler.users.remove(self)
-
 class Application(tornado.web.Application):
     def __init__(self):
         handlers=[
-            (r"/", IndexHandler),
-            (r"/ws", WSHandler),
+            (r"/", IndexHandler.IndexHandler),
+            (r"/ws", WSHandler.WSHandler),
         ]
         settings = {
             'template_path': os.path.dirname(__file__),
