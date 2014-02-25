@@ -27,6 +27,7 @@ window.addEventListener("keyup", function(event){
 
 var canvas = document.querySelector("canvas");
 var drawingSurface = canvas.getContext("2d");
+drawingSurface.font="20px Georgia"
 
 //full screen canvas
 canvas.width = window.innerWidth;
@@ -56,6 +57,8 @@ var shipObject =
     y: 0,
     width: 35,
     height: 37,
+
+    text: "SHiP",
 
     id: undefined,
 
@@ -156,6 +159,11 @@ function render(){
                 sprite.sourceX, sprite.sourceY, sprite.sourceWidth, sprite.sourceHeight,
                 Math.floor(-sprite.width/2), Math.floor(-sprite.height/2), sprite.width, sprite.height
             );
+
+            //Draw text
+            if (sprite.text){
+                drawingSurface.fillText(sprite.text+" "+sprite.x, -sprite.width/2, sprite.height);
+            };
 
             //Restore the drawing surface before rotation
             drawingSurface.restore();
