@@ -48,14 +48,14 @@ var shipObject =
     //position of source image in sprite
     sourceX: 0,
     sourceY: 0,
-    sourceWidth: 52,
-    sourceHeight: 39,
+    sourceWidth: 35,
+    sourceHeight: 37,
 
     //position of the sprite on the canvas
     x: 0,
     y: 0,
-    width: 52,
-    height: 39,
+    width: 35,
+    height: 37,
 
     id: undefined,
 
