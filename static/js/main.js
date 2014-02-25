@@ -1,4 +1,4 @@
-var _ID = undefined;
+var _ID = undefined; //unique id for player ship, we get from server
 multiplayer.init();
 //Arrow key codes
 var KEY = {
@@ -29,8 +29,8 @@ var canvas = document.querySelector("canvas");
 var drawingSurface = canvas.getContext("2d");
 
 //full screen canvas
-canvas.width = document.body.clientWidth;
-canvas.height = document.body.clientHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 //array to store the game sprites
 var sprites = [];
