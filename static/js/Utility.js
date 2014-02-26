@@ -10,7 +10,9 @@ var Utility = {
         canvas.height = 32;
         var ctx = canvas.getContext('2d');
         ctx.fillStyle = color;
-        ctx.fillRect(0, 0, 32, 32);
+        ctx.beginPath();
+        ctx.arc(16,16,16,0,2*Math.PI);
+        ctx.fill();
 
         var link = document.createElement('link');
         link.type = 'image/x-icon';
