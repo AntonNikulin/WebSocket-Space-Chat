@@ -7,6 +7,8 @@ var multiplayer ={
         this.webSocket = new WebSocket(this.webSocketHost);
         this.webSocket.onopen = this.handleOnOpen;
         this.webSocket.onmessage = this.handleOnMessage;
+        this.webSocket.onerror = this.handleOnError;
+        this.webSocket.onclose = this.handleOnClose;
     },
 
     sendMessage: function(message){
@@ -16,6 +18,7 @@ var multiplayer ={
     },
 
     handleOnOpen: function(){
+        document.title = "status: OnLine";
         console.log("conn open");
     },
 
@@ -38,6 +41,15 @@ var multiplayer ={
                 console.log("hit default "+msg);
                 break;
         }
+    },
+
+    handleOnClose: function(){
+        console.log("----CONNECTION CLOSED-----");
+        document.title = "DISCONNECT";
+    },
+
+    handleOnError: function(evt){
+        console.log("---ERROR---- "+evt);
     }
 
 }
