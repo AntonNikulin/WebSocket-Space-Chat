@@ -9,7 +9,11 @@ var Utility = {
         canvas.width = 32;
         canvas.height = 32;
         var ctx = canvas.getContext('2d');
-        ctx.fillStyle = color;
+        var grd=ctx.createRadialGradient(16,16,2,16,16,16);
+        grd.addColorStop(0,color);
+        grd.addColorStop(1,"white");
+
+        ctx.fillStyle=grd;
         ctx.beginPath();
         ctx.arc(16,16,16,0,2*Math.PI);
         ctx.fill();
