@@ -20,6 +20,8 @@ var multiplayer ={
     handleOnOpen: function(){
         document.title = "status: OnLine";
         console.log("conn open");
+
+        Utility.drawFavicon(Colors.GREEN);
     },
 
     handleOnMessage: function(msg){
@@ -46,6 +48,8 @@ var multiplayer ={
     handleOnClose: function(){
         console.log("----CONNECTION CLOSED-----");
         document.title = "DISCONNECT";
+
+        Utility.drawFavicon(Colors.RED);
     },
 
     handleOnError: function(evt){
