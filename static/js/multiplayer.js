@@ -40,8 +40,12 @@ var multiplayer ={
                 };
                 break;
 
+            case "connectedShips":
+                console.log("---ships---- "+msg.data);
+                break;
+
             default:
-                console.log("hit default "+msg);
+                console.log("hit default "+msg.data);
                 break;
         }
     },

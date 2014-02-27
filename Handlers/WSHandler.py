@@ -23,9 +23,14 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         }
         jObj = json.dumps(d)
         self.write_message(jObj)
-        #notify users
-        for user in WSHandler.users:
-            self.write_message({"type":"created", "id":uid})
+
+        #send new user already connected ships
+        conShips = {"messageType": "connectedShips", "ships": []}
+        for k in WSHandler.ships.keys():
+            sh = WSHandler.ships[k]
+            conShips["ships"].append(str(sh))
+        print conShips
+        self.write_message(json.dumps(conShips))
 
     def on_message(self, message):
         #READ and parse client message and react according to message type

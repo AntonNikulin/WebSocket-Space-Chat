@@ -74,7 +74,6 @@ var shipObject =
 
 //create sprite
 var playerShip = Object.create(shipObject);
-playerShip.id = _ID;
 sprites.push(playerShip);
 
 //Load sprite's image
@@ -96,7 +95,6 @@ function update() {
     //UP
     if (KEY.pressedKey[KEY.UP] && !KEY.pressedKey[KEY.DOWN]){
         playerShip.vy = -5;
-        console.log(playerShip.vy);
     }
     //DOWN
     if (KEY.pressedKey[KEY.DOWN] && !KEY.pressedKey[KEY.UP]){
