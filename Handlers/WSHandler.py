@@ -23,6 +23,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         }
         jObj = json.dumps(d)
         self.write_message(jObj)
+        #notify users
+        for user in WSHandler.users:
+            self.write_message({"type":"created", "id":uid})
 
     def on_message(self, message):
         #READ and parse client message and react according to message type
@@ -35,7 +38,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 ship.computeShipPosition(vx,vy)
                 response = {
                     "messageType": "shipPosition",
-                    "uid": ship.getUID(),
+                    "id": ship.getUID(),
                     "x": ship.getX(),
                     "y": ship.getY()
                 }
