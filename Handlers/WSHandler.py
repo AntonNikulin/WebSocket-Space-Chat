@@ -13,7 +13,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     def open(self):
         WSHandler.users.append(self)
-        #assign to unique id to each user
+        #assign unique id to each ship
         uid = str(uuid.uuid4())
         ship = Ship(uid)
         WSHandler.ships[uid] = ship

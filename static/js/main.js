@@ -69,15 +69,12 @@ var shipObject =
     setPosition: function(obj){
         this.x = obj.x;
         this.y = obj.y;
-    },
-
-    setID: function(id){
-        this.id = id;
     }
 }
 
 //create sprite
 var playerShip = Object.create(shipObject);
+playerShip.id = _ID;
 sprites.push(playerShip);
 
 //Load sprite's image
@@ -134,7 +131,6 @@ function update() {
         vy:playerShip.vy
     }
     multiplayer.sendMessage(js);
-
     //Render
     render();
 }
@@ -166,7 +162,7 @@ function render(){
 
             //Draw text
             if (sprite.text){
-                drawingSurface.fillText(sprite.text+" "+sprite.x, -sprite.width/2, sprite.height);
+                drawingSurface.fillText(sprite.text+" "+sprite.x+"; "+_ID, -sprite.width/2, sprite.height);
             };
 
             //Restore the drawing surface before rotation
