@@ -1,7 +1,6 @@
 var multiplayer ={
     webSocketHost: "ws://localhost:8000/ws",
     webSocket: undefined,
-    id: undefined,
 
     init : function(){
         this.webSocket = new WebSocket(this.webSocketHost);
@@ -15,6 +14,12 @@ var multiplayer ={
         if (this.webSocket.readyState === WebSocket.OPEN){
             this.webSocket.send(JSON.stringify(message));
         }
+    },
+
+    getID: function(){
+        multiplayer.sendMessage({
+            messageType: "getID"
+        });
     },
 
     handleOnOpen: function(){
@@ -31,6 +36,7 @@ var multiplayer ={
             case "uid":
                 _ID = messageObject.id;
                 console.log("id: "+_ID);
+                playerShip.id = messageObject.id;
                 break;
 
             case "shipPosition":

@@ -76,6 +76,8 @@ var shipObject =
 
 //create sprite
 var playerShip = Object.create(shipObject);
+multiplayer.getID();
+console.log("----ID: "+playerShip.id);
 sprites.push(playerShip);
 
 //Load sprite's image
