@@ -1,0 +1,4 @@
+global constants in py
+clients sends only directions
+js file with object descr
+parse sended packet in sep function
