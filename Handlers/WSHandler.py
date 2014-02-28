@@ -10,16 +10,18 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     #array to store connected users
     users = []
     ships = {}
+    #uid of the ship
+    uid = 0
 
     def open(self):
         WSHandler.users.append(self)
         #assign unique id to each ship
-        uid = str(uuid.uuid4())
-        ship = Ship(uid)
-        WSHandler.ships[uid] = ship
+        WSHandler.uid = str(uuid.uuid4())
+        ship = Ship(WSHandler.uid)
+        WSHandler.ships[WSHandler.uid] = ship
         d = {
             "messageType": "uid",
-            "id": uid
+            "id": WSHandler.uid
         }
         jObj = json.dumps(d)
         self.write_message(jObj)
@@ -47,13 +49,17 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                     "x": ship.getX(),
                     "y": ship.getY()
                 }
-                #WRITE response to clients
-                for user in WSHandler.users:
-                    user.write_message(response)
-
+                WSHandler.notifyUsers(response)
             except:
-                print "____ERR_____", sys.exc_info()
+                print sys.exc_info()
+
 
     def on_close(self):
-        print "-------CLOSED--------"
         WSHandler.users.remove(self)
+        del WSHandler.ships[WSHandler.uid]
+        print "-------CLOSED--------"
+
+    @classmethod
+    def notifyUsers(cls, message):
+        for user in cls.users:
+            user.write_message(message)
