@@ -43,9 +43,10 @@ var sprites = [];
 //players Ship sprite object
 var shipObject =
 {
-    //Movement
-    //rotation: degree 0-360
+    //Movements
+    //rotation: degree
     rotation: 0,
+
     //velocity
     vx: 0,
     vy: 0,
@@ -62,6 +63,7 @@ var shipObject =
     width: 35,
     height: 37,
 
+    //text which displayed under the ship
     text: "SHiP",
 
     id: undefined,
@@ -152,6 +154,10 @@ function render(){
             //degree to radians
             drawingSurface.rotate(sprite.rotation * Math.PI / 180);
 
+            /* After the  translate  method moves the drawing surface to the sprite’s center point, that point will become the
+            drawing surface’s new 0,0 position. That means if you want the sprite to be centered on that point, you have to
+            move it half its height upward and half its height to the left.
+            */
             drawingSurface.drawImage(
                 shipImage,
                 sprite.sourceX, sprite.sourceY, sprite.sourceWidth, sprite.sourceHeight,
