@@ -31,7 +31,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         conShips = {"messageType": "connectedShips", "ships": []}
         for k in WSHandler.ships.keys():
             sh = WSHandler.ships[k]
-            conShips["ships"].append(str(sh))
+            conShips["ships"].append({
+                "shipId": sh.getUID(),
+                "x": sh.getX(),
+                "y": sh.getY()
+            })
         print "Sending ships: ",conShips
         self.write_message(json.dumps(conShips))
 

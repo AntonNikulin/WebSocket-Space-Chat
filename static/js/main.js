@@ -87,10 +87,6 @@ function update() {
         playerShip.vx = 0;
     }
 
-    //playerShip.setPosition(p);
-    //Move sprite
-    //playerShip.x += playerShip.vx;
-    //playerShip.y += playerShip.vy;
     //send new pos
     var js = {
         messageType: "shipPosition",
