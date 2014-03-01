@@ -30,7 +30,6 @@ canvas.height = window.innerHeight;
 render.init(canvas);
 //create sprite
 var playerShip = Object.create(Blueprints.shipObject);
-multiplayer.getID();
 console.log("----ID: "+playerShip.id);
 render.sprites.push(playerShip);
 

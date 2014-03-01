@@ -10,8 +10,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     #array to store connected users
     users = []
     ships = {}
-    #uid of the ship
-    uid = 0
 
     def open(self):
         WSHandler.users.append(self)
@@ -38,6 +36,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             })
         print "Sending ships: ",conShips
         self.write_message(json.dumps(conShips))
+
 
     def on_message(self, message):
         #READ and parse client message and react according to message type

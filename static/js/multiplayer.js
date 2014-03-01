@@ -43,11 +43,28 @@ var multiplayer ={
                 console.log(messageObject);
                 if (messageObject.id == _ID){
                     playerShip.setPosition(messageObject);
+                    return;
                 };
+                for (var i=0;i<render.ships.length;i++){
+                    var ship = render.ships[i];
+                    if (ship === messageObject.id){
+                        ship.setPosition(messageObject)
+                    }
+                }
                 break;
 
             case "connectedShips":
                 console.log("---ships---- "+msg.data);
+                arr = messageObject.ships;
+                console.log(arr.length);
+                for (var i=0;i<arr.length;i++){
+                    var sh = Object.create(Blueprints.shipObject);
+                    sh.x = arr[i].x;
+                    sh.y = arr[i].y;
+                    sh.id = arr[i].shipId;
+                    render.sprites.push(sh);
+                    console.log(sh);
+                }
                 break;
 
             default:
