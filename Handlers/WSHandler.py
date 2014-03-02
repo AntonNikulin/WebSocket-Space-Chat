@@ -25,17 +25,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.write_message(jObj)
         print "OPEN: ",WSHandler.ships
 
-        #send new user already connected ships
-        conShips = {"messageType": "connectedShips", "ships": []}
-        for k in WSHandler.ships.keys():
-            sh = WSHandler.ships[k]
-            conShips["ships"].append({
-                "shipId": sh.getUID(),
-                "x": sh.getX(),
-                "y": sh.getY()
-            })
-        print "Sending ships: ",conShips
-        self.write_message(json.dumps(conShips))
+        WSHandler.sendWorldStatus()
+
 
 
     def on_message(self, message):
@@ -79,3 +70,17 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def notifyUsers(cls, message):
         for user in cls.users:
             user.write_message(message)
+
+    @classmethod
+    def sendWorldStatus(cls):
+        worldStatus = {"messageType": "connectedShips", "ships": []}
+        for k in cls.ships.keys():
+            sh = cls.ships[k]
+            worldStatus["ships"].append({
+                "shipId": sh.getUID(),
+                "x": sh.getX(),
+                "y": sh.getY()
+            })
+        jWorldStatus = json.dumps(worldStatus)
+        print "Sending World Status: ",jWorldStatus
+        cls.notifyUsers(jWorldStatus)
