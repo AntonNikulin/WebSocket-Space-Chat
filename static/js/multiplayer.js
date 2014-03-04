@@ -26,6 +26,7 @@ var multiplayer ={
     handleOnOpen: function(){
         document.title = "status: OnLine";
         console.log("conn open");
+        multiplayer.CreateShip();
         Utility.drawFavicon(Colors.GREEN);
     },
 
@@ -36,7 +37,7 @@ var multiplayer ={
         switch (messageObject.messageType) {
             case "ShipCreated":
                 //create sprite
-                playerShip = Object.create(Blueprints.shipObject);
+                var playerShip = Object.create(Blueprints.shipObject);
                 playerShip.setPosition(messageObject);
                 playerShip.id = messageObject.id;
                 render.sprites.push(playerShip);

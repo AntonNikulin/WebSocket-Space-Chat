@@ -28,7 +28,7 @@ canvas.height = window.innerHeight;
 render.init(canvas);
 
 multiplayer.init();
-multiplayer.CreateShip();
+//multiplayer.CreateShip();
 
 //Load sprite's image
 var shipImage = new Image();
@@ -42,8 +42,8 @@ function imageLoadHandler(){
 
 function update() {
 
-//    //Create animation loop
-//    window.requestAnimationFrame(update, canvas);
+    //Create animation loop
+    window.requestAnimationFrame(update, canvas);
 //
 //    //Sprite movement
 //    //UP
