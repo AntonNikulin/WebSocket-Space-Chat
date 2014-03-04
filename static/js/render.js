@@ -42,7 +42,7 @@ var render = {
 
                 //Draw text
                 if (sprite.text){
-                    drawingSurface.fillText(sprite.text+" "+sprite.x+"; "+_ID, -sprite.width/2, sprite.height);
+                    drawingSurface.fillText(sprite.text+" "+sprite.x+"; "+sprite.id, -sprite.width/2, sprite.height);
                 };
 
                 //Restore the drawing surface before rotation

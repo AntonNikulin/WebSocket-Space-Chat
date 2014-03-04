@@ -16,27 +16,30 @@ var multiplayer ={
         }
     },
 
-    getID: function(){
+    CreateShip: function(){
         multiplayer.sendMessage({
-            messageType: "getID"
+            messageType: "CreateShip"
         });
     },
 
+    //_____OPEN_____
     handleOnOpen: function(){
         document.title = "status: OnLine";
         console.log("conn open");
-
         Utility.drawFavicon(Colors.GREEN);
     },
 
     handleOnMessage: function(msg){
+        console.log("MSG: "+msg.data);
         var messageObject = JSON.parse(msg.data);
 
         switch (messageObject.messageType) {
-            case "uid":
-                _ID = messageObject.id;
-                console.log("id: "+_ID);
+            case "ShipCreated"://create sprite
+                playerShip = Object.create(Blueprints.shipObject);
+                playerShip.setPosition(messageObject);
                 playerShip.id = messageObject.id;
+                render.sprites.push(playerShip);
+                console.log(msg.id);
                 break;
 
             case "shipPosition":

@@ -13,27 +13,16 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     def open(self):
         WSHandler.users.append(self)
-        #assign unique id to each ship
-        WSHandler.uid = str(uuid.uuid4())
-        ship = Ship(WSHandler.uid)
-        WSHandler.ships[WSHandler.uid] = ship
-        d = {
-            "messageType": "uid",
-            "id": WSHandler.uid
-        }
-        jObj = json.dumps(d)
-        self.write_message(jObj)
-        print "OPEN: ",WSHandler.ships
-
         WSHandler.sendWorldStatus()
-
 
 
     def on_message(self, message):
         #READ and parse client message and react according to message type
         messageObject = json.loads(message)
+        print "Message: ",messageObject
 
         if messageObject["messageType"] == "shipPosition":
+            #Set new position of sended ship
             try:
                 ship = WSHandler.ships[messageObject['uid']]
                 vx = messageObject["vx"]
@@ -47,22 +36,27 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 }
                 WSHandler.notifyUsers(response)
             except:
-                print sys.exc_info()
+                print "SHipPosition: ", sys.exc_info()
 
-        elif messageObject["messageType"] == "getID":
-            ship = Ship(WSHandler.uid)
-            WSHandler.ships[WSHandler.uid] = ship
+        elif messageObject["messageType"] == "CreateShip":
+            #Create unique id for ship and save ship in class variable
+            uid = str(uuid.uuid4())
+            ship = Ship(uid)
+            WSHandler.ships[uid] = ship
             d = {
-                "messageType": "uid",
-                "id": WSHandler.uid
+                "messageType": "ShipCreated",
+                "id": ship.getUID(),
+                "x": ship.getX(),
+                "y": ship.getY()
             }
             jObj = json.dumps(d)
             self.write_message(jObj)
+            print "ShipCreated: ", WSHandler.ships
 
 
     def on_close(self):
         WSHandler.users.remove(self)
-        del WSHandler.ships[WSHandler.uid]
+        #del WSHandler.ships[self.uid]
         print "Close: ",WSHandler.ships
         print "-------CLOSED--------"
 
