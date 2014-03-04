@@ -34,7 +34,8 @@ var multiplayer ={
         var messageObject = JSON.parse(msg.data);
 
         switch (messageObject.messageType) {
-            case "ShipCreated"://create sprite
+            case "ShipCreated":
+                //create sprite
                 playerShip = Object.create(Blueprints.shipObject);
                 playerShip.setPosition(messageObject);
                 playerShip.id = messageObject.id;
