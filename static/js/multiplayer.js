@@ -41,12 +41,13 @@ var multiplayer ={
                 playerShip.setPosition(messageObject);
                 playerShip.id = messageObject.id;
                 render.sprites.push(playerShip);
+                myID = messageObject.id;
                 console.log(msg.id);
                 break;
 
             case "shipPosition":
                 console.log(messageObject);
-                if (messageObject.id == _ID){
+                if (messageObject.id === myID){
                     playerShip.setPosition(messageObject);
                     return;
                 };

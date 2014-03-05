@@ -42,6 +42,7 @@ var render = {
 
                 //Draw text
                 if (sprite.text){
+
                     drawingSurface.fillText(sprite.text+" "+sprite.x+"; "+sprite.id, -sprite.width/2, sprite.height);
                 };
 

@@ -19,7 +19,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_message(self, message):
         #READ and parse client message and react according to message type
         messageObject = json.loads(message)
-        print "Message: ",messageObject
+        #print "Message: ",messageObject
 
         if messageObject["messageType"] == "shipPosition":
             #Set new position of sended ship
