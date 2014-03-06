@@ -46,30 +46,17 @@ var multiplayer ={
                 break;
 
             case "shipPosition":
-                console.log(messageObject);
-                if (messageObject.id === myID){
-                    render.sprites[messageObject.id].setPosition(messageObject);
-                    return;
-                };
-                for (var i=0;i<render.ships.length;i++){
-                    var ship = render.ships[i];
-                    if (ship === messageObject.id){
-                        ship.setPosition(messageObject)
-                    }
-                }
+                render.sprites[messageObject.id].setPosition(messageObject);
                 break;
 
             case "connectedShips":
-                console.log("---ships---- "+msg.data);
                 arr = messageObject.ships;
-                console.log(arr.length);
                 for (var i=0;i<arr.length;i++){
                     var sh = Object.create(Blueprints.shipObject);
                     sh.x = arr[i].x;
                     sh.y = arr[i].y;
                     sh.id = arr[i].shipId;
                     render.sprites[sh.id]=sh;
-                    console.log(sh);
                 }
                 break;
 
@@ -87,7 +74,7 @@ var multiplayer ={
     },
 
     handleOnError: function(evt){
-        console.log("---ERROR---- "+evt);
+        console.log("WSocket---ERROR---- "+evt);
     }
 
 }
