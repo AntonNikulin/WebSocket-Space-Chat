@@ -42,7 +42,6 @@ var multiplayer ={
                 playerShip.id = messageObject.id;
                 render.sprites[playerShip.id]=playerShip;
                 myID = messageObject.id;
-                console.log(msg.id);
                 break;
 
             case "shipPosition":
@@ -74,7 +73,7 @@ var multiplayer ={
     },
 
     handleOnError: function(evt){
-        console.log("WSocket---ERROR---- "+evt);
+        console.log("WSocket---ERROR---- "+JSON.stringify(evt));
     }
 
 }

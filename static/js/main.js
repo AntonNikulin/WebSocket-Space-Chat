@@ -72,11 +72,9 @@ function update() {
     //Set velocity to zero if none of the key are being pressed
     if(!KEY.pressedKey[KEY.UP] && !KEY.pressedKey[KEY.DOWN]){
         velocity.vy = 0;
-        haveSomethingToSend = true;
     }
     if (!KEY.pressedKey[KEY.LEFT] && !KEY.pressedKey[KEY.RIGHT]){
         velocity.vx = 0;
-        haveSomethingToSend = true;
     }
 
     if(haveSomethingToSend){

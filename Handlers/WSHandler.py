@@ -23,20 +23,20 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
         if messageObject["messageType"] == "shipPosition":
             #Set new position of sended ship
-            try:
-                ship = WSHandler.ships[messageObject['uid']]
-                vx = messageObject["vx"]
-                vy = messageObject["vy"]
-                ship.computeShipPosition(vx, vy)
-                response = {
-                    "messageType": "shipPosition",
-                    "id": ship.getUID(),
-                    "x": ship.getX(),
-                    "y": ship.getY()
-                }
-                WSHandler.notifyUsers(response)
-            except:
-                print "SHipPosition: ", sys.exc_info()
+
+            ship = WSHandler.ships[messageObject['uid']]
+            vx = messageObject["vx"]
+            vy = messageObject["vy"]
+            ship.computeShipPosition(vx, vy)
+            response = {
+                "messageType": "shipPosition",
+                "id": ship.getUID(),
+                "x": ship.getX(),
+                "y": ship.getY()
+            }
+            WSHandler.notifyUsers(response)
+            # except:
+            #     print "SHipPosition: ", sys.exc_info()
 
         elif messageObject["messageType"] == "CreateShip":
             #Create unique id for ship and save ship in class variable
