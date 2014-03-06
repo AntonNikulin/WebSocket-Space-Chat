@@ -40,7 +40,7 @@ var multiplayer ={
                 var playerShip = Object.create(Blueprints.shipObject);
                 playerShip.setPosition(messageObject);
                 playerShip.id = messageObject.id;
-                render.sprites.push(playerShip);
+                render.sprites[playerShip.id]=playerShip;
                 myID = messageObject.id;
                 console.log(msg.id);
                 break;
@@ -68,7 +68,7 @@ var multiplayer ={
                     sh.x = arr[i].x;
                     sh.y = arr[i].y;
                     sh.id = arr[i].shipId;
-                    render.sprites.push(sh);
+                    render.sprites[sh.id]=sh;
                     console.log(sh);
                 }
                 break;

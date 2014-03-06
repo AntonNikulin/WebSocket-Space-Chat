@@ -1,6 +1,6 @@
 var render = {
     //array to store game sprites
-    sprites: [],
+    sprites: {},
     drawingSurface: undefined,
 
     init: function(canvas){
@@ -17,8 +17,8 @@ var render = {
         sprites=render.sprites;
         //Loop through all sprites
         if (sprites.length !== 0){
-            for(var i=0; i<sprites.length; i++){
-                var sprite = sprites[i];
+            for(var key in sprites){
+                var sprite = sprites[key];
 
                 drawingSurface.save();
 
