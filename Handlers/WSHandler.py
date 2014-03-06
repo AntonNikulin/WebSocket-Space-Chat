@@ -27,7 +27,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 ship = WSHandler.ships[messageObject['uid']]
                 vx = messageObject["vx"]
                 vy = messageObject["vy"]
-                ship.computeShipPosition(vx,vy)
+                ship.computeShipPosition(vx, vy)
                 response = {
                     "messageType": "shipPosition",
                     "id": ship.getUID(),
