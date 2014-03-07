@@ -12,6 +12,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     ships = {}
 
     def open(self):
+        self.uid = None
         WSHandler.users.append(self)
         WSHandler.sendWorldStatus()
 
@@ -41,6 +42,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         elif messageObject["messageType"] == "CreateShip":
             #Create unique id for ship and save ship in class variable
             uid = str(uuid.uuid4())
+            self.uid = uid
             ship = Ship(uid)
             WSHandler.ships[uid] = ship
             d = {
@@ -56,8 +58,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     def on_close(self):
         WSHandler.users.remove(self)
-        #del WSHandler.ships[self.uid]
-        print "Close: ",WSHandler.ships
+        del WSHandler.ships[self.uid]
+        print "Close: ", WSHandler.ships
         print "-------CLOSED--------"
 
     @classmethod
