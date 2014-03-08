@@ -59,6 +59,11 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     def on_close(self):
         WSHandler.users.remove(self)
         del WSHandler.ships[self.uid]
+        message = {
+            "messageType": "ShipDeleted",
+                "id": self.uid
+        }
+        WSHandler.notifyUsers(json.dumps(message))
         print "Close: ", WSHandler.ships
         print "-------CLOSED--------"
 

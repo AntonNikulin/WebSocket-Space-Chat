@@ -59,6 +59,9 @@ var multiplayer ={
                 }
                 break;
 
+            case "ShipDeleted":
+                delete render.sprites[messageObject.id];
+
             default:
                 console.log("hit default "+msg.data);
                 break;
