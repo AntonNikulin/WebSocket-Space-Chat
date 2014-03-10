@@ -1,2 +1,4 @@
 add connected ship to render
 messages
+коментарии
+заменить константы в проверке типа сообщения.

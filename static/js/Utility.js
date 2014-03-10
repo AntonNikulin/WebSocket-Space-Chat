@@ -5,6 +5,7 @@ var Colors = {
 
 var Utility = {
     drawFavicon: function(color){
+        /*Рисует фавикон отпражающий подключение к серверу. Зеленый или красный круг.*/
         var canvas = document.createElement('canvas');
         canvas.width = 32;
         canvas.height = 32;

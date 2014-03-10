@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import sys
 import uuid
 import json
@@ -53,6 +54,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             }
             jObj = json.dumps(d)
             self.write_message(jObj)
+            #TODO: send to all: mtype = ShipCreated!
             print "ShipCreated: ", WSHandler.ships
 
 
@@ -69,12 +71,16 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     @classmethod
     def notifyUsers(cls, message):
+        """Рассылает сообщение всем подключенным пользователям"""
         for user in cls.users:
             user.write_message(message)
 
     @classmethod
     def sendWorldStatus(cls):
+        """Отправляет всем подключенным пользователям расположение всех кораблей"""
         worldStatus = {"messageType": "connectedShips", "ships": []}
+
+        #Получить координаты всех кораблей, и сохраняем в массив
         for k in cls.ships.keys():
             sh = cls.ships[k]
             worldStatus["ships"].append({
