@@ -41,7 +41,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                 print "SHipPosition: ", messageObject
 
         elif messageObject["messageType"] == "CreateShip":
-            #Create unique id for ship and save ship in class variable
+            #Create unique id for new player's ship and save ship in class variable
             uid = str(uuid.uuid4())
             self.uid = uid
             ship = Ship(uid)
@@ -54,7 +54,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             }
             jObj = json.dumps(d)
             self.write_message(jObj)
-            #TODO: send to all: mtype = ShipCreated!
+            # send to all: new ship was created.
+            newShip = d
+            newShip["messageType"] = "ShipCreated"
+            WSHandler.notifyUsers(json.dumps(newShip))
             print "ShipCreated: ", WSHandler.ships
 
 
@@ -80,7 +83,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         """Отправляет всем подключенным пользователям расположение всех кораблей"""
         worldStatus = {"messageType": "connectedShips", "ships": []}
 
-        #Получить координаты всех кораблей, и сохраняем в массив
+        #Получаем координаты всех кораблей, и сохраняем в массив
         for k in cls.ships.keys():
             sh = cls.ships[k]
             worldStatus["ships"].append({

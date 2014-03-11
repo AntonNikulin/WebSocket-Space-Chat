@@ -42,6 +42,16 @@ var multiplayer ={
                 playerShip.id = messageObject.id;
                 render.sprites[playerShip.id]=playerShip;
                 myID = messageObject.id;
+                console.log("myShipCreated: "+myID)
+                break;
+
+            case "ShipCreated":
+                if (messageObject.id !== myID){
+                    var ship = Object.create(Blueprints.shipObject);
+                    ship.setPosition(messageObject);
+                    ship.id = messageObject.id;
+                    render.sprites[ship.id]=ship;
+                }
                 break;
 
             case "shipPosition":
