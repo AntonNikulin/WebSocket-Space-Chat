@@ -1,18 +1,24 @@
 var Colors = {
     RED: "#F00",
-    GREEN: "#7CFC00"
+    GREEN: "#7CFC00",
+    stopGREEN: "#c6ff90",
+    stopRED: "#ffa2a2"
 }
 
 var Utility = {
     drawFavicon: function(color){
-        /*Рисует фавикон отпражающий подключение к серверу. Зеленый или красный круг.*/
+        /*Рисует фавикон отпражающий подключение к серверу*/
         var canvas = document.createElement('canvas');
         canvas.width = 32;
         canvas.height = 32;
         var ctx = canvas.getContext('2d');
         var grd=ctx.createRadialGradient(16,16,2,16,16,16);
         grd.addColorStop(0,color);
-        grd.addColorStop(1,"white");
+        if (color === Colors.GREEN){
+            grd.addColorStop(1,Colors.stopGREEN);
+        } else {
+            grd.addColorStop(1,Colors.stopRED);
+        }
 
         ctx.fillStyle=grd;
         ctx.beginPath();
