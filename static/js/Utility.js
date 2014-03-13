@@ -13,6 +13,7 @@ var Utility = {
         canvas.height = 32;
         var ctx = canvas.getContext('2d');
         var grd=ctx.createRadialGradient(16,16,2,16,16,16);
+        /* цвет центра круга, на основании этого устанавливаем грани окружности*/
         grd.addColorStop(0,color);
         if (color === Colors.GREEN){
             grd.addColorStop(1,Colors.stopGREEN);
@@ -24,7 +25,7 @@ var Utility = {
         ctx.beginPath();
         ctx.arc(16,16,16,0,2*Math.PI);
         ctx.fill();
-
+        /*создать из рисунка фавикон, и установить его*/
         var link = document.createElement('link');
         link.type = 'image/x-icon';
         link.rel = 'shortcut icon';

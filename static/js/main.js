@@ -1,4 +1,5 @@
 var myID = undefined;
+var chatMessage;
 //Arrow key codes
 var KEY = {
     UP:  38,
@@ -13,6 +14,8 @@ window.addEventListener("keydown", function(event){
     //if alphanumeric pressed send chat message, Else move ship.
     if (event.keyCode >= 48 && event.keyCode <= 90){
         document.title = event.keyCode;
+        chatMessage += String.fromCharCode(event.keyCode);
+        console.log(chatMessage);
     }
     KEY.pressedKey[event.keyCode] = true;
 }, false);
