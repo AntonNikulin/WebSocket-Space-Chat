@@ -1,5 +1,5 @@
 var myID = undefined;
-var chatMessage;
+var chatMessage = "";
 //Arrow key codes
 var KEY = {
     UP:  38,
@@ -11,12 +11,27 @@ KEY.pressedKey = [];
 
 //keyboard listeners
 window.addEventListener("keydown", function(event){
-    //if alphanumeric pressed send chat message, Else move ship.
-    if (event.keyCode >= 48 && event.keyCode <= 90){
+
+    //if alphanumeric or space pressed prepare chat message.
+    if (event.keyCode >= 48 && event.keyCode <= 90 || event.keyCode === 32){
         document.title = event.keyCode;
         chatMessage += String.fromCharCode(event.keyCode);
         console.log(chatMessage);
     }
+
+    //when ENTER was pressed send chat message
+    if (event.keyCode === 13){
+        //prepare json and send
+        multiplayer.sendMessage({
+            messageType: "chatMessage",
+            uid: myID,
+            chatMessage: chatMessage
+        });
+        //clear what has been said
+        chatMessage = "";
+    }
+
+
     KEY.pressedKey[event.keyCode] = true;
 }, false);
 

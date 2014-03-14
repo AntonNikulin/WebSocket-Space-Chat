@@ -2,3 +2,5 @@ messages vanilla js or jq?
 коментарии
 заменить константы в проверке типа сообщения
 возможность использовать никнейм
+background
+python logging

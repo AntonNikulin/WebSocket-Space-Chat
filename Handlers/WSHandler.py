@@ -60,6 +60,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             WSHandler.notifyUsers(json.dumps(newShip))
             print "ShipCreated: ", WSHandler.ships
 
+        elif messageObject["messageType"] == "chatMessage":
+            #rebroacast message to all connected users
+            WSHandler.notifyUsers(messageObject)
+
 
     def on_close(self):
         WSHandler.users.remove(self)
