@@ -13,7 +13,6 @@ html, body {
 /* To remove the scrollbars */
 canvas {
     display:block;
-    border-style:dashed;
     border-width:5px;
     border-color: green;
 }

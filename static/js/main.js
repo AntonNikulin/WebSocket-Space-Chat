@@ -48,14 +48,45 @@ render.init(canvas);
 
 multiplayer.init();
 
-//Load sprite's image
+//An array to store the images that will be loaded and
+//a variable that will used to count them as they load
+var assetsToLoad = [];
+var assetsLoaded = 0;
+
+//Create the background sprite.
+//Position it at the top left corner of the canvas
+//and push it into the sprites array
+var background = {};
+background.sourceWidth = canvas.width;      //CUT image from sprite equal size of the canvas
+background.sourceHeight = canvas.height;    //bigger canvas -> bigger image
+background.width = canvas.width;
+background.height = canvas.height;
+background.x = 0;
+background.y = 0;
+
+//Create the background image and push it into the images array
+var backgroundImage = new Image();
+backgroundImage.addEventListener("load", imageLoadHandler, false);
+backgroundImage.src = "static/assets/sprites/background.jpg";
+assetsToLoad.push(backgroundImage);
+
+//Load ship sprite image
 var shipImage = new Image();
 shipImage.addEventListener("load", imageLoadHandler, false);
 shipImage.src= "static/assets/sprites/Ship1.png";
+assetsToLoad.push(shipImage);
 
 function imageLoadHandler(){
-    //Update the sprite as soon as the image has been loaded
-    update();
+//Each time an image loads, 1 is added to assetsLoaded
+  assetsLoaded++;
+
+  //When assetsLoaded matches the number of images in the
+  //assetsToLoad array, a loop assigns the image to the sprite
+  if(assetsLoaded === assetsToLoad.length)
+  {
+      update();
+  }
+
 }
 
 function update() {

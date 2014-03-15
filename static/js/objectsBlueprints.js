@@ -29,5 +29,9 @@ var Blueprints = {
             this.x = obj.x;
             this.y = obj.y;
         }
-     }
+     },
+
+    Background: {
+
+    }
 }

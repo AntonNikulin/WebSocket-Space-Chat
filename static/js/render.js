@@ -14,6 +14,14 @@ var render = {
         var drawingSurface = this.drawingSurface;
         //Clear previous frame
         drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+        //Draw background
+        drawingSurface.drawImage(
+            backgroundImage,
+            background.x, background.y,
+            background.sourceWidth, background.sourceHeight,
+            background.x, background.y,
+            background.width, background.height
+        );
         sprites=render.sprites;
         //Loop through all sprites
         if (sprites.length !== 0){
