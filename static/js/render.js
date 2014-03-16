@@ -5,7 +5,9 @@ var render = {
 
     init: function(canvas){
         this.drawingSurface = canvas.getContext("2d");
+        //Text settings
         this.drawingSurface.font="20px Georgia"
+        this.drawingSurface.fillStyle = "#FFFFDA"; //Color
 
     },
 

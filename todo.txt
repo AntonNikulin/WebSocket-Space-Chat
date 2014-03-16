@@ -1,6 +1,12 @@
-messages vanilla js or jq?
 коментарии
 заменить константы в проверке типа сообщения
-возможность использовать никнейм
-background
+ability to choose nickname
 python logging
+Chat:
+    russian language,
+    punctuation marks,
+    backspase,
+    move chat message from title
+
+messages:
+    vanilla js or jq?

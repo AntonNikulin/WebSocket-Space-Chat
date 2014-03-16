@@ -14,9 +14,8 @@ window.addEventListener("keydown", function(event){
 
     //if alphanumeric or space pressed prepare chat message.
     if (event.keyCode >= 48 && event.keyCode <= 90 || event.keyCode === 32){
-        document.title = event.keyCode;
         chatMessage += String.fromCharCode(event.keyCode);
-        console.log(chatMessage);
+        document.title = chatMessage;
     }
 
     //when ENTER was pressed send chat message
@@ -24,7 +23,7 @@ window.addEventListener("keydown", function(event){
         //prepare json and send
         multiplayer.sendMessage({
             messageType: "chatMessage",
-            uid: myID,
+            id: myID,
             chatMessage: chatMessage
         });
         //clear what has been said
